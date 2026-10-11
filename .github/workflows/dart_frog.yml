@@ -25,5 +25,5 @@ jobs:
       - name: Install Dart Frog CLI
         run: dart pub global activate dart_frog_cli
 
-      - name: Production Build (Generate Dockerfile)
+      - name: Production Build
         run: dart_frog build
