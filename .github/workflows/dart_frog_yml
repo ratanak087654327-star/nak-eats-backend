@@ -1,0 +1,29 @@
+name: Dart Frog Backend DevOps Pipeline
+
+on:
+  push:
+    branches: [ "main", "master" ]
+  pull_request:
+    branches: [ "main", "master" ]
+
+jobs:
+  devops-build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Dart SDK
+        uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+
+      - name: Install Dependencies
+        run: dart pub get
+
+      - name: Install Dart Frog CLI
+        run: dart pub global activate dart_frog_cli
+
+      - name: Production Build (Generate Dockerfile)
+        run: dart_frog build
